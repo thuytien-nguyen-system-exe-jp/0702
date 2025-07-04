@@ -5,6 +5,7 @@ import { Layout } from '@/components/shared/Layout'
 import { Button } from '@/components/shared/Button'
 import { CardLoading } from '@/components/shared/Loading'
 import ProductCard from '@/components/shared/ProductCard'
+import { mockProducts, mockCategories, mockBrands } from '@/data/mockData'
 
 interface Product {
   id: string
@@ -75,43 +76,83 @@ export default function ProductsPage() {
   const [sortBy, setSortBy] = useState('created')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
 
-  // 商品データを取得
+  // 商品データを取得（静的データ使用）
   const fetchProducts = async () => {
     try {
       setLoading(true)
-      const params = new URLSearchParams({
-        page: currentPage.toString(),
-        limit: '12',
-        sortBy,
-        sortOrder
-      })
-
-      if (selectedCategory) params.append('category', selectedCategory)
-      if (selectedBrand) params.append('brand', selectedBrand)
-      if (selectedSpiceLevels.length > 0) {
-        params.append('spiceLevel', selectedSpiceLevels.join(','))
+      
+      // フィルタリング処理
+      let filteredProducts = [...mockProducts]
+      
+      // カテゴリフィルター
+      if (selectedCategory) {
+        filteredProducts = filteredProducts.filter(product =>
+          product.category.slug === selectedCategory
+        )
       }
-
-      // 価格範囲の処理
+      
+      // ブランドフィルター
+      if (selectedBrand) {
+        filteredProducts = filteredProducts.filter(product =>
+          product.brand?.slug === selectedBrand
+        )
+      }
+      
+      // 価格フィルター
       if (selectedPriceRange) {
         const [min, max] = selectedPriceRange.split('-').map(Number)
-        if (min) params.append('minPrice', min.toString())
-        if (max) params.append('maxPrice', max.toString())
+        filteredProducts = filteredProducts.filter(product => {
+          if (min && max) {
+            return product.price >= min && product.price <= max
+          } else if (min) {
+            return product.price >= min
+          } else if (max) {
+            return product.price <= max
+          }
+          return true
+        })
       }
-
-      const response = await fetch(`/api/products?${params}`)
-      const data = await response.json()
-
-      if (data.success) {
-        setProducts(data.data.products)
-        setFilters(data.data.filters)
-        setTotalPages(data.data.pagination.totalPages)
-        setTotalCount(data.data.pagination.totalCount)
-      } else {
-        setError(data.error || '商品の取得に失敗しました')
+      
+      // 辛さレベルフィルター
+      if (selectedSpiceLevels.length > 0) {
+        filteredProducts = filteredProducts.filter(product =>
+          selectedSpiceLevels.includes(product.spiceLevel || 0)
+        )
       }
+      
+      // ソート処理
+      filteredProducts.sort((a, b) => {
+        switch (sortBy) {
+          case 'price':
+            return sortOrder === 'asc' ? a.price - b.price : b.price - a.price
+          case 'popularity':
+            return sortOrder === 'asc' ? a.reviewCount - b.reviewCount : b.reviewCount - a.reviewCount
+          default: // created
+            return sortOrder === 'asc' ?
+              parseInt(a.id) - parseInt(b.id) :
+              parseInt(b.id) - parseInt(a.id)
+        }
+      })
+      
+      // ページネーション
+      const limit = 12
+      const startIndex = (currentPage - 1) * limit
+      const endIndex = startIndex + limit
+      const paginatedProducts = filteredProducts.slice(startIndex, endIndex)
+      
+      setProducts(paginatedProducts)
+      setFilters({
+        categories: mockCategories,
+        brands: mockBrands,
+        priceRange: { min: 0, max: 1000 },
+        spiceLevels: [0, 1, 2, 3, 4, 5],
+        storageTypes: ['ambient', 'refrigerated', 'frozen']
+      })
+      setTotalPages(Math.ceil(filteredProducts.length / limit))
+      setTotalCount(filteredProducts.length)
+      
     } catch (err) {
-      setError('ネットワークエラーが発生しました')
+      setError('データの読み込みに失敗しました')
       console.error('Products fetch error:', err)
     } finally {
       setLoading(false)

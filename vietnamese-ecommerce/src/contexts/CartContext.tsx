@@ -228,27 +228,15 @@ export function CartProvider({ children }: CartProviderProps) {
     }
   }
 
-  // 商品詳細を取得
+  // 商品詳細を取得（静的データ使用）
   const fetchProductDetails = async (productId: string, productVariantId?: string) => {
-    const response = await fetch('/api/products', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: productId })
-    })
-
-    if (!response.ok) {
-      throw new Error('商品情報の取得に失敗しました')
+    // 静的データから商品を検索
+    const { mockProducts } = await import('@/data/mockData')
+    const product = mockProducts.find(p => p.id === productId)
+    
+    if (!product) {
+      throw new Error('商品が見つかりません')
     }
-
-    const data = await response.json()
-    if (!data.success) {
-      throw new Error(data.error || '商品情報の取得に失敗しました')
-    }
-
-    const product = data.data.product
-    const productVariant = productVariantId
-      ? product.variants.find((v: any) => v.id === productVariantId)
-      : undefined
 
     return {
       product: {
@@ -261,7 +249,7 @@ export function CartProvider({ children }: CartProviderProps) {
         images: product.images,
         category: product.category
       },
-      productVariant
+      productVariant: undefined // 静的サイトではバリアントは使用しない
     }
   }
 
@@ -273,8 +261,8 @@ export function CartProvider({ children }: CartProviderProps) {
 
       const { product, productVariant } = await fetchProductDetails(productId, productVariantId)
 
-      // 在庫チェック
-      const availableStock = productVariant?.stockQuantity ?? product.stockQuantity
+      // 在庫チェック（静的サイトでは常に在庫ありとする）
+      const availableStock = product.stockQuantity
       if (availableStock < quantity) {
         throw new Error('在庫が不足しています')
       }

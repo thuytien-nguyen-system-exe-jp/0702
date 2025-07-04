@@ -1,11 +1,36 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { NextRequest } from 'next/server'
-import { prisma } from './prisma'
 import { AuthUser } from '@/types'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-key'
 const JWT_EXPIRES_IN = '7d'
+
+// モックユーザーデータ（静的サイト用）
+const mockUsers = [
+  {
+    id: '1',
+    email: 'demo@example.com',
+    firstName: 'Demo',
+    lastName: 'User',
+    preferredLanguage: 'ja',
+    avatarUrl: null,
+    isActive: true,
+    hashedPassword: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/hL/.LVtOy' // password: demo123
+  }
+]
+
+const mockAdmins = [
+  {
+    id: 'admin1',
+    email: 'admin@example.com',
+    name: 'Admin User',
+    role: 'admin',
+    permissions: ['read', 'write', 'delete'],
+    isActive: true,
+    hashedPassword: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj/hL/.LVtOy' // password: admin123
+  }
+]
 
 // パスワードハッシュ化
 export async function hashPassword(password: string): Promise<string> {
@@ -50,7 +75,7 @@ export function getTokenFromRequest(request: NextRequest): string | null {
   return token || null
 }
 
-// 認証されたユーザー情報を取得
+// 認証されたユーザー情報を取得（モック版）
 export async function getAuthenticatedUser(request: NextRequest): Promise<AuthUser | null> {
   const token = getTokenFromRequest(request)
   if (!token) return null
@@ -59,20 +84,8 @@ export async function getAuthenticatedUser(request: NextRequest): Promise<AuthUs
   if (!decoded) return null
 
   try {
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.userId },
-      select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        preferredLanguage: true,
-        avatarUrl: true,
-        isActive: true
-      }
-    })
-
-    if (!user || !user.isActive) return null
+    const user = mockUsers.find(u => u.id === decoded.userId && u.isActive)
+    if (!user) return null
 
     return {
       id: user.id,
@@ -80,7 +93,7 @@ export async function getAuthenticatedUser(request: NextRequest): Promise<AuthUs
       firstName: user.firstName,
       lastName: user.lastName,
       preferredLanguage: user.preferredLanguage,
-      avatarUrl: user.avatarUrl
+      avatarUrl: user.avatarUrl || undefined
     }
   } catch (error) {
     console.error('Error fetching authenticated user:', error)
@@ -116,7 +129,7 @@ export async function verifyAdminAuth(request: NextRequest): Promise<{ success: 
   }
 }
 
-// 管理者認証
+// 管理者認証（モック版）
 export async function getAuthenticatedAdmin(request: NextRequest) {
   const token = getTokenFromRequest(request)
   if (!token) return null
@@ -125,24 +138,56 @@ export async function getAuthenticatedAdmin(request: NextRequest) {
   if (!decoded || decoded.role !== 'admin') return null
 
   try {
-    const admin = await prisma.admin.findUnique({
-      where: { id: decoded.userId },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        permissions: true,
-        isActive: true
-      }
-    })
+    const admin = mockAdmins.find(a => a.id === decoded.userId && a.isActive)
+    if (!admin) return null
 
-    if (!admin || !admin.isActive) return null
-
-    return admin
+    return {
+      id: admin.id,
+      email: admin.email,
+      name: admin.name,
+      role: admin.role,
+      permissions: admin.permissions,
+      isActive: admin.isActive
+    }
   } catch (error) {
     console.error('Error fetching authenticated admin:', error)
     return null
+  }
+}
+
+// モック認証関数（静的サイト用）
+export async function authenticateUser(email: string, password: string): Promise<AuthUser | null> {
+  const user = mockUsers.find(u => u.email === email && u.isActive)
+  if (!user) return null
+
+  const isValidPassword = await verifyPassword(password, user.hashedPassword)
+  if (!isValidPassword) return null
+
+  return {
+    id: user.id,
+    email: user.email,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    preferredLanguage: user.preferredLanguage,
+    avatarUrl: user.avatarUrl || undefined
+  }
+}
+
+// モック管理者認証関数（静的サイト用）
+export async function authenticateAdmin(email: string, password: string) {
+  const admin = mockAdmins.find(a => a.email === email && a.isActive)
+  if (!admin) return null
+
+  const isValidPassword = await verifyPassword(password, admin.hashedPassword)
+  if (!isValidPassword) return null
+
+  return {
+    id: admin.id,
+    email: admin.email,
+    name: admin.name,
+    role: admin.role,
+    permissions: admin.permissions,
+    isActive: admin.isActive
   }
 }
 

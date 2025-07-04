@@ -30,19 +30,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
     checkAuthStatus()
   }, [])
 
-  // 認証状態をチェック
+  // 認証状態をチェック（静的サイト用）
   const checkAuthStatus = async () => {
     try {
-      const response = await fetch('/api/auth', {
-        method: 'GET',
-        credentials: 'include'
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        if (data.success && data.data.user) {
-          setUser(data.data.user)
-        }
+      // 静的サイトでは認証機能は無効
+      // ローカルストレージから状態を復元（オプション）
+      const savedUser = localStorage.getItem('auth_user')
+      if (savedUser) {
+        setUser(JSON.parse(savedUser))
       }
     } catch (error) {
       console.error('Auth check error:', error)
@@ -51,80 +46,57 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  // ログイン
+  // ログイン（静的サイト用 - デモ機能）
   const login = async (credentials: LoginCredentials): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true)
       
-      const response = await fetch('/api/auth?action=login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(credentials)
-      })
-
-      const data = await response.json()
-
-      if (data.success && data.data.user) {
-        setUser(data.data.user)
+      // 静的サイトでは実際の認証は行わない
+      // デモ用のダミーユーザー
+      if (credentials.email === 'demo@example.com' && credentials.password === 'demo123') {
+        const demoUser = {
+          id: 'demo-user',
+          email: 'demo@example.com',
+          firstName: 'デモ',
+          lastName: 'ユーザー',
+          preferredLanguage: 'ja' as const,
+          avatarUrl: undefined
+        }
+        setUser(demoUser)
+        localStorage.setItem('auth_user', JSON.stringify(demoUser))
         return { success: true }
       } else {
-        return { success: false, error: data.error || 'ログインに失敗しました' }
+        return { success: false, error: '静的サイトではデモ用ログインのみ利用可能です（demo@example.com / demo123）' }
       }
     } catch (error) {
       console.error('Login error:', error)
-      return { success: false, error: 'ネットワークエラーが発生しました' }
+      return { success: false, error: 'ログインエラーが発生しました' }
     } finally {
       setIsLoading(false)
     }
   }
 
-  // 登録
+  // 登録（静的サイト用 - 無効化）
   const register = async (data: RegisterData): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true)
-      
-      const response = await fetch('/api/auth?action=register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(data)
-      })
-
-      const result = await response.json()
-
-      if (result.success && result.data.user) {
-        setUser(result.data.user)
-        return { success: true }
-      } else {
-        return { success: false, error: result.error || '登録に失敗しました' }
-      }
+      return { success: false, error: '静的サイトでは新規登録は利用できません' }
     } catch (error) {
       console.error('Register error:', error)
-      return { success: false, error: 'ネットワークエラーが発生しました' }
+      return { success: false, error: '登録機能は利用できません' }
     } finally {
       setIsLoading(false)
     }
   }
 
-  // ログアウト
+  // ログアウト（静的サイト用）
   const logout = async () => {
     try {
       setIsLoading(true)
-      
-      await fetch('/api/auth?action=logout', {
-        method: 'POST',
-        credentials: 'include'
-      })
-
       setUser(null)
+      localStorage.removeItem('auth_user')
     } catch (error) {
       console.error('Logout error:', error)
-      // エラーが発生してもローカル状態はクリア
       setUser(null)
     } finally {
       setIsLoading(false)
@@ -184,20 +156,11 @@ export function AdminAuthProvider({ children }: AuthProviderProps) {
     checkAdminAuthStatus()
   }, [])
 
-  // 管理者認証状態をチェック
+  // 管理者認証状態をチェック（静的サイト用 - 無効化）
   const checkAdminAuthStatus = async () => {
     try {
-      const response = await fetch('/api/admin', {
-        method: 'GET',
-        credentials: 'include'
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        if (data.success && data.data.admin) {
-          setAdmin(data.data.admin)
-        }
-      }
+      // 静的サイトでは管理者機能は無効
+      setAdmin(null)
     } catch (error) {
       console.error('Admin auth check error:', error)
     } finally {
@@ -205,49 +168,23 @@ export function AdminAuthProvider({ children }: AuthProviderProps) {
     }
   }
 
-  // 管理者ログイン
+  // 管理者ログイン（静的サイト用 - 無効化）
   const login = async (credentials: LoginCredentials): Promise<{ success: boolean; error?: string }> => {
     try {
       setIsLoading(true)
-      
-      const response = await fetch('/api/admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          action: 'login',
-          ...credentials
-        })
-      })
-
-      const data = await response.json()
-
-      if (data.success && data.data.admin) {
-        setAdmin(data.data.admin)
-        return { success: true }
-      } else {
-        return { success: false, error: data.error || 'ログインに失敗しました' }
-      }
+      return { success: false, error: '静的サイトでは管理者機能は利用できません' }
     } catch (error) {
       console.error('Admin login error:', error)
-      return { success: false, error: 'ネットワークエラーが発生しました' }
+      return { success: false, error: '管理者機能は利用できません' }
     } finally {
       setIsLoading(false)
     }
   }
 
-  // 管理者ログアウト
+  // 管理者ログアウト（静的サイト用）
   const logout = async () => {
     try {
       setIsLoading(true)
-      
-      await fetch('/api/auth?action=logout', {
-        method: 'POST',
-        credentials: 'include'
-      })
-
       setAdmin(null)
     } catch (error) {
       console.error('Admin logout error:', error)

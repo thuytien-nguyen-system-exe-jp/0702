@@ -10,9 +10,7 @@
     "type-check": "tsc --noEmit",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts",
-    "db:admin-seed": "tsx prisma/admin-seed.ts",
-    "db:reset": "prisma db push --force-reset && npm run db:seed && npm run db:admin-seed"
+    "db:reset": "prisma db push --force-reset"
   },
   "keywords": [
     "vietnamese",
