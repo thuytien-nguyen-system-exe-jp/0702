@@ -21,7 +21,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/mango-1.svg',
+        imageUrl: '/0702/images/products/mango-1.svg',
         altText: 'ベトナム産マンゴー'
       }
     ],
@@ -48,7 +48,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/dragon-fruit-1.svg',
+        imageUrl: '/0702/images/products/dragon-fruit-1.svg',
         altText: 'ドラゴンフルーツ'
       }
     ],
@@ -75,7 +75,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/pakchoi-1.svg',
+        imageUrl: '/0702/images/products/pakchoi-1.svg',
         altText: '新鮮なチンゲン菜'
       }
     ],
@@ -102,7 +102,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/cilantro-1.svg',
+        imageUrl: '/0702/images/products/cilantro-1.svg',
         altText: '新鮮なパクチー'
       }
     ],
@@ -129,7 +129,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/fish-sauce-1.svg',
+        imageUrl: '/0702/images/products/fish-sauce-1.svg',
         altText: 'ベトナム魚醤（ヌクマム）'
       }
     ],
@@ -156,7 +156,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/chili-sauce-1.svg',
+        imageUrl: '/0702/images/products/chili-sauce-1.svg',
         altText: 'ベトナムチリソース'
       }
     ],
@@ -183,7 +183,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/dumpling-1.svg',
+        imageUrl: '/0702/images/products/dumpling-1.svg',
         altText: 'ベトナム風餃子（冷凍）'
       }
     ],
@@ -210,7 +210,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/rice-paper-snack-1.svg',
+        imageUrl: '/0702/images/products/rice-paper-snack-1.svg',
         altText: 'ベトナム風ライスペーパースナック'
       }
     ],
@@ -237,7 +237,7 @@ export const mockProducts = [
     },
     images: [
       {
-        imageUrl: '/images/products/coconut-water-1.svg',
+        imageUrl: '/0702/images/products/coconut-water-1.svg',
         altText: 'ベトナム産ココナッツウォーター'
       }
     ],
