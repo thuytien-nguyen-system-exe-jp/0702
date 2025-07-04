@@ -6,8 +6,8 @@ const nextConfig = {
     unoptimized: true
   },
   // GitHub Pagesのサブパス対応
-  basePath: process.env.NODE_ENV === 'production' ? '/vietnamese-ecommerce' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/vietnamese-ecommerce/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/0702' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/0702/' : '',
   // ESLintを一時的に無効化（デプロイ用）
   eslint: {
     ignoreDuringBuilds: true,
