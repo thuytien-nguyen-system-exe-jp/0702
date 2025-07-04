@@ -1,31 +1,28 @@
-<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bottleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#CD853F;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#8B4513;stop-opacity:0.8" />
     </linearGradient>
-    <linearGradient id="fishSauceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    <linearGradient id="liquidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:0.9" />
     </linearGradient>
   </defs>
-  <rect width="400" height="400" fill="#FFF8DC"/>
-  <!-- Bottle body -->
-  <rect x="150" y="120" width="100" height="220" rx="15" fill="url(#bottleGradient)"/>
-  <!-- Fish sauce inside -->
-  <rect x="160" y="140" width="80" height="180" rx="10" fill="url(#fishSauceGradient)"/>
-  <!-- Bottle neck -->
-  <rect x="175" y="100" width="50" height="30" rx="5" fill="url(#bottleGradient)"/>
-  <!-- Cap -->
-  <rect x="170" y="80" width="60" height="25" rx="8" fill="#2F4F4F"/>
-  <!-- Label -->
-  <rect x="160" y="180" width="80" height="60" fill="#FFFFFF" opacity="0.9"/>
-  <text x="200" y="200" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#8B4513">NUOC MAM</text>
-  <text x="200" y="215" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#8B4513">Fish Sauce</text>
-  <text x="200" y="230" font-family="Arial, sans-serif" font-size="8" text-anchor="middle" fill="#666">Premium Quality</text>
-  <!-- Vietnamese text -->
-  <text x="200" y="360" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#8B4513">Fish Sauce</text>
-  <text x="200" y="385" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">Authentic Flavor</text>
+  <!-- ボトル本体 -->
+  <rect x="75" y="60" width="50" height="120" rx="5" ry="5" fill="url(#bottleGradient)" stroke="#654321" stroke-width="2"/>
+  <!-- ボトルネック -->
+  <rect x="85" y="40" width="30" height="25" fill="url(#bottleGradient)" stroke="#654321" stroke-width="2"/>
+  <!-- キャップ -->
+  <rect x="82" y="30" width="36" height="15" rx="3" ry="3" fill="#2F4F4F" stroke="#000" stroke-width="1"/>
+  <!-- 液体 -->
+  <rect x="78" y="70" width="44" height="100" rx="3" ry="3" fill="url(#liquidGradient)"/>
+  <!-- ラベル -->
+  <rect x="80" y="90" width="40" height="60" fill="#F5F5DC" stroke="#8B4513" stroke-width="1" opacity="0.9"/>
+  <!-- ラベルテキスト風 -->
+  <line x1="85" y1="100" x2="115" y2="100" stroke="#8B4513" stroke-width="2"/>
+  <line x1="85" y1="110" x2="115" y2="110" stroke="#8B4513" stroke-width="1"/>
+  <line x1="85" y1="120" x2="115" y2="120" stroke="#8B4513" stroke-width="1"/>
+  <line x1="85" y1="130" x2="115" y2="130" stroke="#8B4513" stroke-width="1"/>
 </svg>

@@ -1,41 +1,35 @@
-<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="canGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#E6E6FA;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#D3D3D3;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#C0C0C0;stop-opacity:1" />
+    <linearGradient id="coconutGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="coconutWaterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#F0FFFF;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#E0FFFF;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#B0E0E6;stop-opacity:1" />
+    <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0F8FF;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#E6F3FF;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#B0E0E6;stop-opacity:0.8" />
     </linearGradient>
   </defs>
-  <rect width="400" height="400" fill="#F0F8FF"/>
-  <!-- Can body -->
-  <rect x="160" y="120" width="80" height="200" rx="8" fill="url(#canGradient)"/>
-  <!-- Coconut water inside (visible through transparent effect) -->
-  <rect x="165" y="140" width="70" height="160" rx="5" fill="url(#coconutWaterGradient)" opacity="0.8"/>
-  <!-- Can top -->
-  <ellipse cx="200" cy="120" rx="40" ry="8" fill="#A9A9A9"/>
-  <!-- Pull tab -->
-  <ellipse cx="200" cy="115" rx="8" ry="4" fill="#696969"/>
-  <ellipse cx="200" cy="115" rx="4" ry="2" fill="#2F4F4F"/>
-  <!-- Label -->
-  <rect x="165" y="180" width="70" height="80" fill="#FFFFFF" opacity="0.9"/>
-  <!-- Coconut illustration on label -->
-  <ellipse cx="185" cy="200" rx="12" ry="15" fill="#8B4513"/>
-  <ellipse cx="185" cy="195" rx="8" ry="10" fill="#DEB887"/>
-  <circle cx="182" cy="192" r="2" fill="#654321"/>
-  <circle cx="188" cy="190" r="1.5" fill="#654321"/>
-  <circle cx="185" cy="198" r="1" fill="#654321"/>
-  <!-- Text on label -->
-  <text x="215" y="200" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#4682B4">COCONUT</text>
-  <text x="215" y="210" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#4682B4">WATER</text>
-  <text x="200" y="225" font-family="Arial, sans-serif" font-size="6" text-anchor="middle" fill="#666">100% Natural</text>
-  <text x="200" y="235" font-family="Arial, sans-serif" font-size="6" text-anchor="middle" fill="#666">330ml</text>
-  <!-- Reflection on can -->
-  <rect x="170" y="130" width="8" height="180" fill="#FFFFFF" opacity="0.3"/>
-  <text x="200" y="360" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#8B4513">Coconut Water</text>
-  <text x="200" y="385" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">Pure & Refreshing</text>
+  <!-- ココナッツ本体 -->
+  <ellipse cx="100" cy="120" rx="45" ry="55" fill="url(#coconutGradient)" stroke="#654321" stroke-width="2"/>
+  <!-- ココナッツの繊維模様 -->
+  <path d="M 70 90 Q 80 100 70 110 Q 80 120 70 130 Q 80 140 70 150" stroke="#654321" stroke-width="1" fill="none" opacity="0.7"/>
+  <path d="M 130 90 Q 120 100 130 110 Q 120 120 130 130 Q 120 140 130 150" stroke="#654321" stroke-width="1" fill="none" opacity="0.7"/>
+  <path d="M 85 80 Q 95 90 85 100 Q 95 110 85 120" stroke="#654321" stroke-width="1" fill="none" opacity="0.5"/>
+  <path d="M 115 80 Q 105 90 115 100 Q 105 110 115 120" stroke="#654321" stroke-width="1" fill="none" opacity="0.5"/>
+  <!-- 開口部 -->
+  <ellipse cx="100" cy="70" rx="15" ry="8" fill="#2F4F4F" stroke="#000" stroke-width="1"/>
+  <!-- ココナッツウォーター -->
+  <ellipse cx="100" cy="75" rx="12" ry="6" fill="url(#waterGradient)"/>
+  <!-- ストロー -->
+  <rect x="95" y="30" width="4" height="50" fill="#FFD700" stroke="#DAA520" stroke-width="1"/>
+  <rect x="93" y="25" width="8" height="8" rx="2" ry="2" fill="#FF6347"/>
+  <!-- ココナッツの目 -->
+  <circle cx="90" cy="100" r="3" fill="#2F4F4F"/>
+  <circle cx="110" cy="105" r="3" fill="#2F4F4F"/>
+  <ellipse cx="100" cy="115" rx="4" ry="2" fill="#2F4F4F"/>
+  <!-- 水滴 -->
+  <circle cx="85" cy="60" r="2" fill="url(#waterGradient)" opacity="0.8"/>
+  <circle cx="115" cy="55" r="1.5" fill="url(#waterGradient)" opacity="0.8"/>
 </svg>
