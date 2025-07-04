@@ -1,0 +1,57 @@
+name: Deploy Vietnamese E-commerce to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'vietnamese-ecommerce/**' ]
+  pull_request:
+    branches: [ main ]
+    paths: [ 'vietnamese-ecommerce/**' ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'vietnamese-ecommerce/package-lock.json'
+
+    - name: Install dependencies
+      run: npm ci
+      working-directory: ./vietnamese-ecommerce
+
+    - name: Create mock database
+      run: |
+        mkdir -p prisma
+        touch prisma/dev.db
+      working-directory: ./vietnamese-ecommerce
+
+    - name: Generate Prisma client
+      run: npx prisma generate
+      working-directory: ./vietnamese-ecommerce
+
+    - name: Build application
+      run: npm run build
+      working-directory: ./vietnamese-ecommerce
+      env:
+        NODE_ENV: production
+
+    - name: Add .nojekyll file
+      run: touch out/.nojekyll
+      working-directory: ./vietnamese-ecommerce
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./vietnamese-ecommerce/out
+        force_orphan: true
