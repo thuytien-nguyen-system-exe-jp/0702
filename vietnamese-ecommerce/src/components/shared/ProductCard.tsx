@@ -100,7 +100,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     )}>
       {/* 商品画像 */}
       <div className="aspect-square bg-gradient-warm rounded-t-xl relative overflow-hidden">
-        <Link href={`/products/${product.sku}`}>
+        <Link href={`/products/product-${product.id}`}>
           {product.images.length > 0 ? (
             <Image
               src={product.images[0].imageUrl}
@@ -158,7 +158,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* 商品名 */}
-        <Link href={`/products/${product.sku}`}>
+        <Link href={`/products/product-${product.id}`}>
           <h3 className="font-semibold mb-2 text-sm line-clamp-2 hover:text-red-600 transition-colors">
             {productName}
           </h3>
@@ -264,7 +264,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               )}
             </Button>
 
-            <Link href={`/products/${product.sku}`}>
+            <Link href={`/products/product-${product.id}`}>
               <Button variant="outline" size="sm" className="w-full hover-lift">
                 {language === 'ja' ? '詳細を見る' : 'Xem chi tiết'}
               </Button>
