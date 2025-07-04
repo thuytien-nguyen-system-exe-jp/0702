@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Layout } from '@/components/shared/Layout'
 import { Button } from '@/components/shared/Button'
@@ -286,13 +285,10 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
             {/* メイン画像 */}
             <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden relative">
               {product.images.length > 0 ? (
-                <Image
+                <img
                   src={product.images[selectedImageIndex].imageUrl}
                   alt={product.images[selectedImageIndex].altText || productName}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
+                  className="w-full h-full object-contain p-4"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-8xl">
@@ -331,12 +327,10 @@ export default function ProductDetailClient({ slug }: ProductDetailClientProps) 
                       selectedImageIndex === index ? 'border-red-600' : 'border-gray-200'
                     }`}
                   >
-                    <Image
+                    <img
                       src={image.imageUrl}
                       alt={image.altText || productName}
-                      width={80}
-                      height={80}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-contain"
                     />
                   </button>
                 ))}

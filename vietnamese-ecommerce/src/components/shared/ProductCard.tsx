@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Button } from './Button'
 import { useCart } from '@/hooks/useCart'
 import { cn } from '@/lib/utils'
@@ -102,12 +101,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="aspect-square bg-gradient-warm rounded-t-xl relative overflow-hidden">
         <Link href={`/products/product-${product.id}`}>
           {product.images.length > 0 ? (
-            <Image
+            <img
               src={product.images[0].imageUrl}
               alt={product.images[0].altText || productName}
-              fill
-              className="object-contain p-4 group-hover:scale-110 transition-transform duration-300"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-300"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-6xl">
