@@ -1,0 +1,54 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tamarind-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" fill="#FFF8DC"/>
+  
+  <!-- Tamarind pods -->
+  <g transform="translate(100,100)">
+    <!-- Main tamarind pod -->
+    <path d="M-50,-10 Q-55,-20 -40,-25 L40,-15 Q55,-10 50,0 Q55,10 40,15 L-40,25 Q-55,20 -50,10 Q-55,0 -50,-10" 
+          fill="url(#tamarind-gradient)" stroke="#5D4037" stroke-width="2"/>
+    
+    <!-- Pod segments -->
+    <line x1="-30" y1="-15" x2="-30" y2="15" stroke="#654321" stroke-width="1" opacity="0.7"/>
+    <line x1="-10" y1="-12" x2="-10" y2="12" stroke="#654321" stroke-width="1" opacity="0.7"/>
+    <line x1="10" y1="-12" x2="10" y2="12" stroke="#654321" stroke-width="1" opacity="0.7"/>
+    <line x1="30" y1="-10" x2="30" y2="10" stroke="#654321" stroke-width="1" opacity="0.7"/>
+    
+    <!-- Seeds inside -->
+    <ellipse cx="-35" cy="0" rx="4" ry="6" fill="#8B4513"/>
+    <ellipse cx="-15" cy="0" rx="4" ry="6" fill="#8B4513"/>
+    <ellipse cx="5" cy="0" rx="4" ry="6" fill="#8B4513"/>
+    <ellipse cx="25" cy="0" rx="4" ry="6" fill="#8B4513"/>
+  </g>
+  
+  <!-- Additional smaller pods -->
+  <g transform="translate(70,50) scale(0.6) rotate(-20)">
+    <path d="M-30,-8 Q-35,-15 -25,-18 L25,-12 Q35,-8 30,0 Q35,8 25,12 L-25,18 Q-35,15 -30,8 Q-35,0 -30,-8" 
+          fill="#A0522D" stroke="#5D4037" stroke-width="1"/>
+    <ellipse cx="-15" cy="0" rx="3" ry="4" fill="#654321"/>
+    <ellipse cx="0" cy="0" rx="3" ry="4" fill="#654321"/>
+    <ellipse cx="15" cy="0" rx="3" ry="4" fill="#654321"/>
+  </g>
+  
+  <g transform="translate(130,150) scale(0.7) rotate(30)">
+    <path d="M-35,-8 Q-40,-15 -30,-18 L30,-12 Q40,-8 35,0 Q40,8 30,12 L-30,18 Q-40,15 -35,8 Q-40,0 -35,-8" 
+          fill="#A0522D" stroke="#5D4037" stroke-width="1"/>
+    <ellipse cx="-20" cy="0" rx="3" ry="4" fill="#654321"/>
+    <ellipse cx="-5" cy="0" rx="3" ry="4" fill="#654321"/>
+    <ellipse cx="10" cy="0" rx="3" ry="4" fill="#654321"/>
+    <ellipse cx="25" cy="0" rx="3" ry="4" fill="#654321"/>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle cx="40" cy="40" r="2" fill="#D2691E" opacity="0.5"/>
+  <circle cx="160" cy="60" r="1.5" fill="#D2691E" opacity="0.5"/>
+  <circle cx="30" cy="170" r="1" fill="#D2691E" opacity="0.5"/>
+</svg>

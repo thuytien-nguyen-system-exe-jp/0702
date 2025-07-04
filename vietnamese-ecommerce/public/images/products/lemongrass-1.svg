@@ -1,0 +1,41 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lemongrass-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8FBC8F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" fill="#F0F8F0"/>
+  
+  <!-- Lemongrass stalks -->
+  <g transform="translate(100,180)">
+    <!-- Main stalk 1 -->
+    <ellipse cx="-20" cy="-80" rx="8" ry="60" fill="url(#lemongrass-gradient)" transform="rotate(-10)"/>
+    <ellipse cx="-20" cy="-80" rx="6" ry="55" fill="#9ACD32" transform="rotate(-10)"/>
+    
+    <!-- Main stalk 2 -->
+    <ellipse cx="0" cy="-85" rx="9" ry="65" fill="url(#lemongrass-gradient)" transform="rotate(5)"/>
+    <ellipse cx="0" cy="-85" rx="7" ry="60" fill="#9ACD32" transform="rotate(5)"/>
+    
+    <!-- Main stalk 3 -->
+    <ellipse cx="20" cy="-75" rx="8" ry="55" fill="url(#lemongrass-gradient)" transform="rotate(15)"/>
+    <ellipse cx="20" cy="-75" rx="6" ry="50" fill="#9ACD32" transform="rotate(15)"/>
+    
+    <!-- Leaves -->
+    <path d="M-30,-120 Q-40,-140 -25,-150 Q-10,-140 -15,-120" fill="#7CFC00" opacity="0.8"/>
+    <path d="M-5,-130 Q-15,-150 0,-160 Q15,-150 10,-130" fill="#7CFC00" opacity="0.8"/>
+    <path d="M25,-115 Q15,-135 30,-145 Q45,-135 40,-115" fill="#7CFC00" opacity="0.8"/>
+    
+    <!-- Base/roots -->
+    <ellipse cx="-20" cy="-10" rx="12" ry="8" fill="#F5DEB3"/>
+    <ellipse cx="0" cy="-8" rx="14" ry="10" fill="#F5DEB3"/>
+    <ellipse cx="20" cy="-12" rx="11" ry="7" fill="#F5DEB3"/>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle cx="40" cy="40" r="3" fill="#90EE90" opacity="0.6"/>
+  <circle cx="160" cy="50" r="2" fill="#90EE90" opacity="0.6"/>
+  <circle cx="170" cy="160" r="4" fill="#90EE90" opacity="0.6"/>
+</svg>

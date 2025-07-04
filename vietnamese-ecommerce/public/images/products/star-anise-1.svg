@@ -1,0 +1,51 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="star-anise-gradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" fill="#FFF8DC"/>
+  
+  <!-- Star anise -->
+  <g transform="translate(100,100)">
+    <!-- Main star shape -->
+    <g>
+      <!-- 8 pointed star -->
+      <path d="M0,-40 L8,-15 L25,-20 L12,-5 L30,0 L12,5 L25,20 L8,15 L0,40 L-8,15 L-25,20 L-12,5 L-30,0 L-12,-5 L-25,-20 L-8,-15 Z" 
+            fill="url(#star-anise-gradient)" stroke="#5D4037" stroke-width="1"/>
+      
+      <!-- Inner details -->
+      <circle cx="0" cy="0" r="8" fill="#8B4513"/>
+      <circle cx="0" cy="0" r="4" fill="#A0522D"/>
+      
+      <!-- Seeds in each point -->
+      <circle cx="0" cy="-25" r="3" fill="#654321"/>
+      <circle cx="18" cy="-12" r="3" fill="#654321"/>
+      <circle cx="18" cy="12" r="3" fill="#654321"/>
+      <circle cx="0" cy="25" r="3" fill="#654321"/>
+      <circle cx="-18" cy="12" r="3" fill="#654321"/>
+      <circle cx="-18" cy="-12" r="3" fill="#654321"/>
+    </g>
+  </g>
+  
+  <!-- Additional star anise pieces -->
+  <g transform="translate(60,60) scale(0.6)">
+    <path d="M0,-30 L6,-11 L18,-15 L9,-4 L22,0 L9,4 L18,15 L6,11 L0,30 L-6,11 L-18,15 L-9,4 L-22,0 L-9,-4 L-18,-15 L-6,-11 Z" 
+          fill="#A0522D" stroke="#5D4037" stroke-width="1"/>
+    <circle cx="0" cy="0" r="4" fill="#8B4513"/>
+  </g>
+  
+  <g transform="translate(140,140) scale(0.5) rotate(45)">
+    <path d="M0,-25 L5,-9 L15,-12 L7,-3 L18,0 L7,3 L15,12 L5,9 L0,25 L-5,9 L-15,12 L-7,3 L-18,0 L-7,-3 L-15,-12 L-5,-9 Z" 
+          fill="#A0522D" stroke="#5D4037" stroke-width="1"/>
+    <circle cx="0" cy="0" r="3" fill="#8B4513"/>
+  </g>
+  
+  <!-- Decorative spice powder -->
+  <circle cx="30" cy="170" r="2" fill="#D2691E" opacity="0.6"/>
+  <circle cx="170" cy="30" r="1.5" fill="#D2691E" opacity="0.6"/>
+  <circle cx="160" cy="170" r="1" fill="#D2691E" opacity="0.6"/>
+</svg>

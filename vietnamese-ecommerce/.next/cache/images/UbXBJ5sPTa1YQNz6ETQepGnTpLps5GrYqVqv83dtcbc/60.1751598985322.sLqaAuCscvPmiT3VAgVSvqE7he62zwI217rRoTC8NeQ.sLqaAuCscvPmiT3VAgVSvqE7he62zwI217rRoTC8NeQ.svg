@@ -1,0 +1,41 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ricePaperGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF8DC;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F5DEB3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DEB887;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="toppingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6347;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF4500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DC143C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#FFF8DC"/>
+  <!-- Main rice paper circle -->
+  <circle cx="200" cy="200" r="90" fill="url(#ricePaperGradient)"/>
+  <!-- Texture lines on rice paper -->
+  <circle cx="200" cy="200" r="85" fill="none" stroke="#DEB887" stroke-width="1" opacity="0.5"/>
+  <circle cx="200" cy="200" r="70" fill="none" stroke="#DEB887" stroke-width="1" opacity="0.3"/>
+  <circle cx="200" cy="200" r="55" fill="none" stroke="#DEB887" stroke-width="1" opacity="0.3"/>
+  <!-- Sauce/topping spots -->
+  <circle cx="180" cy="180" r="8" fill="url(#toppingGradient)"/>
+  <circle cx="220" cy="190" r="6" fill="url(#toppingGradient)"/>
+  <circle cx="190" cy="220" r="7" fill="url(#toppingGradient)"/>
+  <circle cx="210" cy="210" r="5" fill="url(#toppingGradient)"/>
+  <circle cx="200" cy="170" r="4" fill="url(#toppingGradient)"/>
+  <circle cx="230" cy="220" r="6" fill="url(#toppingGradient)"/>
+  <!-- Sesame seeds -->
+  <ellipse cx="175" cy="195" rx="2" ry="1" fill="#F4A460"/>
+  <ellipse cx="225" cy="205" rx="2" ry="1" fill="#F4A460"/>
+  <ellipse cx="195" cy="235" rx="2" ry="1" fill="#F4A460"/>
+  <ellipse cx="215" cy="185" rx="2" ry="1" fill="#F4A460"/>
+  <ellipse cx="205" cy="225" rx="2" ry="1" fill="#F4A460"/>
+  <!-- Crispy edges -->
+  <path d="M120 150 Q140 140 160 150" fill="#CD853F" opacity="0.7"/>
+  <path d="M240 150 Q260 140 280 150" fill="#CD853F" opacity="0.7"/>
+  <path d="M120 250 Q140 260 160 250" fill="#CD853F" opacity="0.7"/>
+  <path d="M240 250 Q260 260 280 250" fill="#CD853F" opacity="0.7"/>
+  <text x="200" y="340" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#8B4513">Rice Paper Snack</text>
+  <text x="200" y="365" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">Crispy & Spicy</text>
+</svg>

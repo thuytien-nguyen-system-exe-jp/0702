@@ -1,0 +1,31 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pakChoiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#98FB98;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#32CD32;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="stemGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F0FFF0;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E0FFE0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D0FFD0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F5FFFA"/>
+  <!-- Stems -->
+  <ellipse cx="180" cy="280" rx="15" ry="60" fill="url(#stemGradient)"/>
+  <ellipse cx="200" cy="285" rx="18" ry="65" fill="url(#stemGradient)"/>
+  <ellipse cx="220" cy="280" rx="15" ry="60" fill="url(#stemGradient)"/>
+  <!-- Leaves -->
+  <ellipse cx="170" cy="200" rx="35" ry="25" fill="url(#pakChoiGradient)" transform="rotate(-15 170 200)"/>
+  <ellipse cx="200" cy="180" rx="40" ry="30" fill="url(#pakChoiGradient)" transform="rotate(5 200 180)"/>
+  <ellipse cx="230" cy="195" rx="38" ry="28" fill="url(#pakChoiGradient)" transform="rotate(20 230 195)"/>
+  <ellipse cx="185" cy="220" rx="32" ry="22" fill="url(#pakChoiGradient)" transform="rotate(-25 185 220)"/>
+  <ellipse cx="215" cy="210" rx="35" ry="25" fill="url(#pakChoiGradient)" transform="rotate(15 215 210)"/>
+  <!-- Leaf veins -->
+  <path d="M170 185 Q175 200 180 215" stroke="#228B22" stroke-width="1" fill="none"/>
+  <path d="M200 165 Q205 180 210 195" stroke="#228B22" stroke-width="1" fill="none"/>
+  <path d="M230 180 Q235 195 240 210" stroke="#228B22" stroke-width="1" fill="none"/>
+  <text x="200" y="360" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#8B4513">Fresh Pak Choi</text>
+  <text x="200" y="385" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">Crispy & Nutritious</text>
+</svg>

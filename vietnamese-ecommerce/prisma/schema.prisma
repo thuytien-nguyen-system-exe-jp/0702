@@ -1,0 +1,357 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+// ユーザーテーブル
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  passwordHash      String    @map("password_hash")
+  firstName         String?   @map("first_name")
+  lastName          String?   @map("last_name")
+  phone             String?
+  preferredLanguage String    @default("ja") @map("preferred_language")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+  lastLoginAt       DateTime? @map("last_login_at")
+  isActive          Boolean   @default(true) @map("is_active")
+  emailVerified     Boolean   @default(false) @map("email_verified")
+  avatarUrl         String?   @map("avatar_url")
+
+  // リレーション
+  orders     Order[]
+  cartItems  CartItem[]
+  reviews    Review[]
+  addresses  Address[]
+  wishlists  Wishlist[]
+
+  @@map("users")
+}
+
+// 管理者テーブル
+model Admin {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  passwordHash String   @map("password_hash")
+  name        String
+  role        String
+  permissions Json?
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  lastLoginAt DateTime? @map("last_login_at")
+  isActive    Boolean   @default(true) @map("is_active")
+  createdById String?   @map("created_by_id")
+
+  // リレーション
+  createdBy    Admin?     @relation("AdminCreatedBy", fields: [createdById], references: [id])
+  createdAdmins Admin[]   @relation("AdminCreatedBy")
+  adminLogs    AdminLog[]
+  createdProducts Product[] @relation("ProductCreatedBy")
+  updatedProducts Product[] @relation("ProductUpdatedBy")
+
+  @@map("admins")
+}
+
+// カテゴリテーブル
+model Category {
+  id            String  @id @default(cuid())
+  nameJa        String  @map("name_ja")
+  nameVi        String  @map("name_vi")
+  slug          String  @unique
+  descriptionJa String? @map("description_ja")
+  descriptionVi String? @map("description_vi")
+  parentId      String? @map("parent_id")
+  imageUrl      String? @map("image_url")
+  sortOrder     Int     @default(0) @map("sort_order")
+  isActive      Boolean @default(true) @map("is_active")
+  seoMeta       Json?   @map("seo_meta")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // リレーション
+  parent   Category?  @relation("CategoryParent", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryParent")
+  products Product[]
+
+  @@map("categories")
+}
+
+// ブランドテーブル
+model Brand {
+  id            String  @id @default(cuid())
+  name          String
+  slug          String  @unique
+  descriptionJa String? @map("description_ja")
+  descriptionVi String? @map("description_vi")
+  logoUrl       String? @map("logo_url")
+  countryOrigin String? @map("country_origin")
+  isActive      Boolean @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // リレーション
+  products Product[]
+
+  @@map("brands")
+}
+
+// 商品テーブル
+model Product {
+  id                     String  @id @default(cuid())
+  sku                    String  @unique
+  nameJa                 String  @map("name_ja")
+  nameVi                 String  @map("name_vi")
+  descriptionJa          String? @map("description_ja")
+  descriptionVi          String? @map("description_vi")
+  price                  Float
+  costPrice              Float? @map("cost_price")
+  stockQuantity          Int     @default(0) @map("stock_quantity")
+  reservedQuantity       Int     @default(0) @map("reserved_quantity")
+  categoryId             String  @map("category_id")
+  brandId                String? @map("brand_id")
+  spiceLevel             Int?    @map("spice_level")
+  allergenInfo           Json?   @map("allergen_info")
+  cookingInstructionsJa  String? @map("cooking_instructions_ja")
+  cookingInstructionsVi  String? @map("cooking_instructions_vi")
+  storageType            String? @map("storage_type")
+  shelfLifeDays          Int?    @map("shelf_life_days")
+  weight                 Float?
+  dimensions             Json?
+  isActive               Boolean @default(true) @map("is_active")
+  isFeatured             Boolean @default(false) @map("is_featured")
+  sortOrder              Int     @default(0) @map("sort_order")
+  seoMeta                Json?   @map("seo_meta")
+  createdAt              DateTime @default(now()) @map("created_at")
+  updatedAt              DateTime @updatedAt @map("updated_at")
+  createdById            String? @map("created_by_id")
+  updatedById            String? @map("updated_by_id")
+
+  // リレーション
+  category       Category        @relation(fields: [categoryId], references: [id])
+  brand          Brand?          @relation(fields: [brandId], references: [id])
+  createdBy      Admin?          @relation("ProductCreatedBy", fields: [createdById], references: [id])
+  updatedBy      Admin?          @relation("ProductUpdatedBy", fields: [updatedById], references: [id])
+  cartItems      CartItem[]
+  orderItems     OrderItem[]
+  reviews        Review[]
+  images         ProductImage[]
+  variants       ProductVariant[]
+  wishlists      Wishlist[]
+
+  @@map("products")
+}
+
+// 商品画像テーブル
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String   @map("product_id")
+  imageUrl  String   @map("image_url")
+  altText   String?  @map("alt_text")
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // リレーション
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_images")
+}
+
+// 商品バリアントテーブル
+model ProductVariant {
+  id            String  @id @default(cuid())
+  productId     String  @map("product_id")
+  name          String
+  value         String
+  priceModifier Float @default(0) @map("price_modifier")
+  stockQuantity Int     @default(0) @map("stock_quantity")
+  sku           String?
+  isActive      Boolean @default(true) @map("is_active")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // リレーション
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+
+  @@map("product_variants")
+}
+
+// 注文テーブル
+model Order {
+  id                 String    @id @default(cuid())
+  orderNumber        String    @unique @map("order_number")
+  userId             String    @map("user_id")
+  subtotal           Float
+  shippingCost       Float   @default(0) @map("shipping_cost")
+  taxAmount          Float   @default(0) @map("tax_amount")
+  discountAmount     Float   @default(0) @map("discount_amount")
+  totalAmount        Float   @map("total_amount")
+  currency           String    @default("JPY")
+  status             String    @default("pending")
+  paymentStatus      String    @default("pending") @map("payment_status")
+  shippingStatus     String    @default("pending") @map("shipping_status")
+  shippingAddressId  String    @map("shipping_address_id")
+  billingAddressId   String?   @map("billing_address_id")
+  paymentMethodId    String?   @map("payment_method_id")
+  shippingMethod     String?   @map("shipping_method")
+  trackingNumber     String?   @map("tracking_number")
+  notes              String?
+  metadata           Json?
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime  @updatedAt @map("updated_at")
+  shippedAt          DateTime? @map("shipped_at")
+  deliveredAt        DateTime? @map("delivered_at")
+  cancelledAt        DateTime? @map("cancelled_at")
+
+  // リレーション
+  user            User                @relation(fields: [userId], references: [id])
+  shippingAddress Address             @relation("OrderShippingAddress", fields: [shippingAddressId], references: [id])
+  billingAddress  Address?            @relation("OrderBillingAddress", fields: [billingAddressId], references: [id])
+  items           OrderItem[]
+  statusHistory   OrderStatusHistory[]
+
+  @@map("orders")
+}
+
+// 注文アイテムテーブル
+model OrderItem {
+  id               String  @id @default(cuid())
+  orderId          String  @map("order_id")
+  productId        String  @map("product_id")
+  productVariantId String? @map("product_variant_id")
+  quantity         Int
+  unitPrice        Float @map("unit_price")
+  totalPrice       Float @map("total_price")
+  productSnapshot  Json?   @map("product_snapshot")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  // リレーション
+  order          Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product        Product         @relation(fields: [productId], references: [id])
+  productVariant ProductVariant? @relation(fields: [productVariantId], references: [id])
+
+  @@map("order_items")
+}
+
+// 注文ステータス履歴テーブル
+model OrderStatusHistory {
+  id        String   @id @default(cuid())
+  orderId   String   @map("order_id")
+  status    String
+  notes     String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // リレーション
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_status_history")
+}
+
+// カートアイテムテーブル
+model CartItem {
+  id               String  @id @default(cuid())
+  userId           String  @map("user_id")
+  productId        String  @map("product_id")
+  productVariantId String? @map("product_variant_id")
+  quantity         Int
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  // リレーション
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product        Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productVariant ProductVariant? @relation(fields: [productVariantId], references: [id])
+
+  @@map("cart_items")
+}
+
+// 住所テーブル
+model Address {
+  id           String  @id @default(cuid())
+  userId       String  @map("user_id")
+  type         String
+  firstName    String  @map("first_name")
+  lastName     String  @map("last_name")
+  company      String?
+  postalCode   String  @map("postal_code")
+  prefecture   String
+  city         String
+  addressLine1 String  @map("address_line1")
+  addressLine2 String? @map("address_line2")
+  phone        String?
+  isDefault    Boolean @default(false) @map("is_default")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // リレーション
+  user                User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shippingOrders      Order[] @relation("OrderShippingAddress")
+  billingOrders       Order[] @relation("OrderBillingAddress")
+
+  @@map("addresses")
+}
+
+// レビューテーブル
+model Review {
+  id                  String  @id @default(cuid())
+  userId              String  @map("user_id")
+  productId           String  @map("product_id")
+  orderId             String? @map("order_id")
+  rating              Int
+  title               String?
+  comment             String?
+  images              Json?
+  isVerifiedPurchase  Boolean @default(false) @map("is_verified_purchase")
+  isApproved          Boolean @default(false) @map("is_approved")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  // リレーション
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
+
+// ウィッシュリストテーブル
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  productId String   @map("product_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // リレーション
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@map("wishlists")
+}
+
+// 管理者ログテーブル
+model AdminLog {
+  id           String   @id @default(cuid())
+  adminId      String   @map("admin_id")
+  action       String
+  resourceType String   @map("resource_type")
+  resourceId   String?  @map("resource_id")
+  oldData      Json?    @map("old_data")
+  newData      Json?    @map("new_data")
+  ipAddress    String?  @map("ip_address")
+  userAgent    String?  @map("user_agent")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // リレーション
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@map("admin_logs")
+}

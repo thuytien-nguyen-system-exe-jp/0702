@@ -1,0 +1,38 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dumplingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5DEB3;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#DEB887;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#D2B48C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pleatsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DEB887;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CD853F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#F0F8FF"/>
+  <!-- Main dumpling body -->
+  <ellipse cx="200" cy="200" rx="80" ry="60" fill="url(#dumplingGradient)"/>
+  <!-- Pleats on top -->
+  <path d="M140 180 Q160 160 180 180" fill="url(#pleatsGradient)"/>
+  <path d="M160 175 Q180 155 200 175" fill="url(#pleatsGradient)"/>
+  <path d="M180 175 Q200 155 220 175" fill="url(#pleatsGradient)"/>
+  <path d="M200 175 Q220 155 240 175" fill="url(#pleatsGradient)"/>
+  <path d="M220 180 Q240 160 260 180" fill="url(#pleatsGradient)"/>
+  <!-- Second dumpling (partially visible) -->
+  <ellipse cx="160" cy="240" rx="60" ry="45" fill="url(#dumplingGradient)" opacity="0.8"/>
+  <path d="M120 225 Q135 210 150 225" fill="url(#pleatsGradient)" opacity="0.8"/>
+  <path d="M135 222 Q150 207 165 222" fill="url(#pleatsGradient)" opacity="0.8"/>
+  <path d="M150 222 Q165 207 180 222" fill="url(#pleatsGradient)" opacity="0.8"/>
+  <!-- Third dumpling (background) -->
+  <ellipse cx="240" cy="250" rx="55" ry="40" fill="url(#dumplingGradient)" opacity="0.6"/>
+  <path d="M205 238 Q218 225 230 238" fill="url(#pleatsGradient)" opacity="0.6"/>
+  <path d="M218 236 Q230 223 242 236" fill="url(#pleatsGradient)" opacity="0.6"/>
+  <path d="M230 236 Q242 223 254 236" fill="url(#pleatsGradient)" opacity="0.6"/>
+  <!-- Steam effect -->
+  <path d="M180 140 Q185 130 180 120 Q175 110 180 100" stroke="#E0E0E0" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M200 135 Q205 125 200 115 Q195 105 200 95" stroke="#E0E0E0" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M220 140 Q225 130 220 120 Q215 110 220 100" stroke="#E0E0E0" stroke-width="2" fill="none" opacity="0.7"/>
+  <text x="200" y="340" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#8B4513">Vietnamese Dumplings</text>
+  <text x="200" y="365" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">Frozen & Ready</text>
+</svg>

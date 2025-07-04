@@ -1,0 +1,27 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bottleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CD853F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sauceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF4500;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF6347;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DC143C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" fill="#FFF8DC"/>
+  <!-- Bottle -->
+  <rect x="160" y="120" width="80" height="200" rx="10" fill="url(#bottleGradient)"/>
+  <!-- Sauce inside -->
+  <rect x="170" y="140" width="60" height="160" rx="5" fill="url(#sauceGradient)"/>
+  <!-- Cap -->
+  <rect x="175" y="100" width="50" height="30" rx="5" fill="#2F4F4F"/>
+  <!-- Label -->
+  <rect x="170" y="180" width="60" height="40" fill="#FFFFFF" opacity="0.9"/>
+  <text x="200" y="195" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#FF0000">CHILI</text>
+  <text x="200" y="210" font-family="Arial, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#FF0000">SAUCE</text>
+  <text x="200" y="350" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#8B4513">Chili Sauce</text>
+  <text x="200" y="375" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">Spicy & Hot</text>
+</svg>
